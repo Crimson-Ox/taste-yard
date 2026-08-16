@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin — Taste Yard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Space+Mono:wght@400;700&family=Work+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<main class="admin-auth-page">
+    <div class="admin-auth-card">
+        <div class="admin-auth-head">
+            <span class="logo-mark">TY</span>
+            <h1>Welcome back</h1>
+            <p>You're signed in as an admin.</p>
+        </div>
+
+        <p style="text-align:center; color: var(--muted); margin-bottom: 24px;">
+            Menu management and order tracking land here in the next phase.
+        </p>
+
+        <a href="admin-menu.html" class="btn btn-primary" style="width:100%; display:block; text-align:center; margin-bottom:12px;">Manage Menu</a>
+        <button id="logoutBtn" class="btn btn-outline" style="width:100%;">Sign Out</button>
+    </div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase-client.js"></script>
+<script src="js/admin-auth.js"></script>
+<script>
+    protectAdminPage();
+</script>
+</body>
+</html>
