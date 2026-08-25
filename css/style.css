@@ -4,15 +4,13 @@
    GLOBAL STYLES
    ========================================================= */
 :root {
-    --charcoal: #1B1712;
-    --surface: #2A2319;
-    --orange: #E8622C;
-    --green: #5C8A5A;
-    --gold: #D9A441;
-    --sand: #F3E9D8;
-    --muted: #B8AD9C;
-    --border: rgba(243, 233, 216, 0.12);
-    --max-width: 1180px;
+    --charcoal: #0D0D0D;
+    --surface: #1A1A1A;
+    --orange: #D4AF37;
+    --green: #6B6B6B;
+    --gold: #D4AF37;
+    --sand: #FFFFFF;
+    --muted: #B0B0B0;
 }
 * {
     box-sizing: border-box;
@@ -814,3 +812,14 @@ h2 span {
     .admin-row { grid-template-columns: 1fr; }
     .form-row { grid-template-columns: 1fr; }
 }
+[data-site="status-badge"] {
+    display: inline-block;
+    font-family: var(--mono, 'Space Mono', monospace);
+    font-size: 13px;
+    padding: 8px 16px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+}
+
+.status-open { background: rgba(107,142,90,0.15); color: #8AC98A; }
+.status-closed { background: rgba(200,60,60,0.15); color: #E08484; }

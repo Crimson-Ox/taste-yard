@@ -1,9 +1,11 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About — Taste Yard</title>
+    <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -16,8 +18,9 @@
 <header class="site-header">
     <a href="index.html" class="logo">
         <span class="logo-mark">TY</span>
-        <span>Taste Yard</span>
+        <span data-site="name">Taste Yard</span>
     </a>
+    <span data-site="status-badge" class="status-open">🟢 Open — Orders are currently being accepted.</span>
     <button class="menu-toggle">☰</button>
     <nav class="main-nav">
         <a href="index.html">Home</a>
@@ -38,7 +41,7 @@
             More than food.
             <span>It's a feeling.</span>
         </h1>
-        <p>
+        <p data-site="description">
             Welcome to the Yard.
         </p>
     </div>
@@ -127,7 +130,7 @@
         <div>
             <a href="index.html" class="logo footer-logo">
                 <span class="logo-mark">TY</span>
-                <span>Taste Yard</span>
+                <span data-site="name">Taste Yard</span>
             </a>
         </div>
         <div>
@@ -145,6 +148,9 @@
         © 2026 Taste Yard.
     </div>
 </footer>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="js/app.js"></script>
+<script src="js/supabase-client.js"></script>
+<script src="js/site-settings.js"></script>
 </body>
 </html>

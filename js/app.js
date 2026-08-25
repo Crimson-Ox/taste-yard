@@ -224,7 +224,7 @@ function escapeJS(value) {
 /* =========================================================
    WHATSAPP ORDER
    ========================================================= */
-function sendOrderViaWhatsApp(event) {
+async function sendOrderViaWhatsApp(event) {
     event.preventDefault();
     const warning =
         document.getElementById("orderWarning");
@@ -260,9 +260,42 @@ function sendOrderViaWhatsApp(event) {
             .focus();
         return;
     }
-    const orderNumber =
-        document.getElementById("orderNumber")
-            ?.textContent || "----";
+
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const originalBtnText = submitBtn.innerHTML;
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Placing order…";
+
+    let orderNumber = "----";
+
+    try {
+        const { data, error } = await supabaseClient.rpc("place_order", {
+            p_customer_name: name,
+            p_customer_phone: phone,
+            p_fulfilment_type: fulfilment.toLowerCase(),
+            p_delivery_address: fulfilment === "Delivery" ? address : null,
+            p_total: getCartTotal(),
+            p_items: cart.map(item => ({
+                name: item.name,
+                price: item.price,
+                quantity: item.quantity
+            }))
+        });
+
+        if (error) {
+            console.error("Order could not be saved:", error);
+        } else if (data && data[0]) {
+            orderNumber = data[0].order_number;
+            const orderNumberEl = document.getElementById("orderNumber");
+            if (orderNumberEl) orderNumberEl.textContent = orderNumber;
+        }
+    } catch (err) {
+        console.error("Order could not be saved:", err);
+    }
+
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = originalBtnText;
+
     let message = "";
     message += `🔥 *TASTE YARD ORDER*\\n`;
     message += `Order #: ${orderNumber}\\n`;
@@ -287,8 +320,9 @@ function sendOrderViaWhatsApp(event) {
     message += `Sent from the Taste Yard website.`;
     const encodedMessage =
         encodeURIComponent(message);
+    const whatsappNumber = window.SITE_WHATSAPP_NUMBER || RESTAURANT_WHATSAPP;
     const whatsappURL =
-        `https://wa.me/${RESTAURANT_WHATSAPP}?text=${encodedMessage}`;
+        `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
     window.open(
         whatsappURL,
         "_blank"
@@ -297,16 +331,11 @@ function sendOrderViaWhatsApp(event) {
 /* =========================================================
    ORDER NUMBER
    ========================================================= */
-function generateOrderNumber() {
+
     const element =
         document.getElementById("orderNumber");
-    if (!element) return;
-    const random =
-        Math.floor(
-            1000 + Math.random() * 9000
-        );
-    element.textContent = random;
-}
+   
+
 /* =========================================================
    DELIVERY / PICKUP
    ========================================================= */
@@ -395,7 +424,6 @@ document.addEventListener(
         updateCartCount();
         setupAddButtons();
         renderCart();
-        generateOrderNumber();
         setupFulfilment();
         setupMobileNavigation();
         const orderForm =
