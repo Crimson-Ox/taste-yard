@@ -46,15 +46,19 @@ function applySiteSettings(data) {
         window.SITE_WHATSAPP_NUMBER = data.whatsapp_number;
     }
 
-    const badge = document.querySelector('[data-site="status-badge"]');
-    if (badge) {
-        badge.textContent = data.is_open
-            ? "🟢 Open — Orders are currently being accepted."
-            : "🔴 Closed — We're currently closed.";
+        document.querySelectorAll('[data-site="status-badge"]').forEach(badge => {
+        badge.textContent = data.is_open ? "🟢 Open" : "🔴 Closed";
         badge.classList.toggle("status-open", data.is_open);
         badge.classList.toggle("status-closed", !data.is_open);
-    }
+    });
 
+    document.querySelectorAll('[data-site="status-banner"]').forEach(banner => {
+        banner.textContent = data.is_open
+            ? "🟢 Open — Orders are currently being accepted."
+            : "🔴 Closed — We're currently closed.";
+        banner.classList.toggle("status-open", data.is_open);
+        banner.classList.toggle("status-closed", !data.is_open);
+    });
     if (!data.is_open) {
         enforceClosedState();
     }

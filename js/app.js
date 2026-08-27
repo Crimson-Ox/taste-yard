@@ -296,27 +296,27 @@ async function sendOrderViaWhatsApp(event) {
     submitBtn.disabled = false;
     submitBtn.innerHTML = originalBtnText;
 
-    let message = "";
-    message += `🔥 *TASTE YARD ORDER*\\n`;
-    message += `Order #: ${orderNumber}\\n`;
-    message += `------------------------------\\n\\n`;
-    message += `*CUSTOMER*\\n`;
-    message += `Name: ${name}\\n`;
-    message += `Phone: ${phone}\\n`;
-    message += `Fulfilment: ${fulfilment}\\n`;
+        let message = "";
+    message += `🔥 *TASTE YARD ORDER*\n`;
+    message += `Order #: ${orderNumber}\n`;
+    message += `------------------------------\n\n`;
+    message += `*CUSTOMER*\n`;
+    message += `Name: ${name}\n`;
+    message += `Phone: ${phone}\n`;
+    message += `Fulfilment: ${fulfilment}\n`;
     if (fulfilment === "Delivery") {
-        message += `Address: ${address}\\n`;
+        message += `Address: ${address}\n`;
     }
-    message += `\\n*ORDER*\\n`;
+    message += `\n*ORDER*\n`;
     cart.forEach(item => {
         const itemTotal =
             item.price * item.quantity;
         message +=
-            `${item.quantity} × ${item.name} — ${formatNaira(itemTotal)}\\n`;
+            `${item.quantity} × ${item.name} — ${formatNaira(itemTotal)}\n`;
     });
-    message += `\\n------------------------------\\n`;
-    message += `*TOTAL: ${formatNaira(getCartTotal())}*\\n`;
-    message += `------------------------------\\n\\n`;
+    message += `\n------------------------------\n`;
+    message += `*TOTAL: ${formatNaira(getCartTotal())}*\n`;
+    message += `------------------------------\n\n`;
     message += `Sent from the Taste Yard website.`;
     const encodedMessage =
         encodeURIComponent(message);
