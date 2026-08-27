@@ -840,3 +840,87 @@ h2 span {
     border-radius: 8px;
     margin-bottom: 24px;
 }
+/* =========================================================
+   MISSING ROOT VARIABLES — fixes invisible borders and
+   uncapped container width
+   ========================================================= */
+:root {
+    --border: rgba(243, 233, 216, 0.12);
+    --max-width: 1200px;
+}
+
+/* =========================================================
+   MOBILE NAVIGATION — the actual fix
+   ========================================================= */
+html, body {
+    overflow-x: hidden;
+    max-width: 100%;
+}
+
+@media (max-width: 860px) {
+
+    .site-header {
+        padding: 0 16px;
+        gap: 10px;
+    }
+
+    .logo {
+        min-width: 0;
+        flex: 1 1 auto;
+        font-size: 1rem;
+    }
+
+    .logo span:not(.logo-mark) {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        max-width: 140px;
+        display: inline-block;
+    }
+
+    [data-site="status-badge"] {
+        display: none;
+    }
+
+    .menu-toggle {
+        display: block;
+        flex-shrink: 0;
+    }
+
+    .main-nav {
+        display: none;
+        position: fixed;
+        top: 78px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0;
+        padding: 10px 24px;
+        background: var(--charcoal);
+        overflow-y: auto;
+        z-index: 100;
+    }
+
+    .main-nav.open {
+        display: flex;
+    }
+
+    .main-nav a {
+        width: 100%;
+        padding: 16px 0;
+        border-bottom: 1px solid rgba(255,255,255,0.08);
+        font-size: 1rem;
+    }
+
+    .main-nav a.active::after {
+        display: none;
+    }
+
+    .nav-order {
+        width: 100%;
+        justify-content: center;
+        margin-top: 10px;
+    }
+}
